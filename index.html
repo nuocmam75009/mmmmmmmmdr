@@ -183,11 +183,11 @@
   <script src="playlist.js"></script>
 
   <img src="assets/hey-you.jpeg" alt="Hey you!" class="hero-image" />
-  <h1>Are you free on July 10th? 🥺</h1>
+  <h1>Are you free on July 10th? 🙄​</h1>
 
   <div class="buttons-container">
     <button class="btn yes bounce" onclick="window.location.href='second.html'">Yes 💖</button>
-    <button class="btn no" onclick="moveNoButton()">No ��</button>
+    <button class="btn no" id="noButton">No 🙃</button>
   </div>
 
   <script>
@@ -204,6 +204,14 @@
       noButton.style.left = randomX + 'px';
       noButton.style.top = randomY + 'px';
     }
+
+    // Add hover event listener to No button
+    document.addEventListener('DOMContentLoaded', function() {
+      const noButton = document.getElementById('noButton');
+      if (noButton) {
+        noButton.addEventListener('mouseenter', moveNoButton);
+      }
+    });
   </script>
 </body>
 </html>
