@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hey you...</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive;
+      text-align: center;
+      background-color: #fff0f5;
+      padding-top: 50px;
+      overflow: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    h1 {
+      font-size: 2.5em;
+      color: #ff69b4;
+      margin-bottom: 40px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+      animation: bounce 2s infinite;
+    }
+    .btn {
+      margin: 20px;
+      padding: 18px 35px;
+      font-size: 1.3em;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: bold;
+      position: relative;
+      overflow: hidden;
+    }
+    .yes {
+      background: linear-gradient(135deg, #ff69b4 0%, #ff8da1 100%);
+      color: white;
+      box-shadow: 0 8px 25px rgba(255, 105, 180, 0.3);
+      transform: translateY(0);
+    }
+    .yes:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 12px 35px rgba(255, 105, 180, 0.4);
+    }
+    .yes::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s;
+    }
+    .yes:hover::before {
+      left: 100%;
+    }
+    .no {
+      background: linear-gradient(135deg, #ddd 0%, #ccc 100%);
+      color: #888;
+      position: relative;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .no:hover {
+      transform: scale(1.02);
+    }
+    .buttons-container {
+      display: flex;
+      gap: 30px;
+      margin-top: 20px;
+    }
+    .hero-image {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 30px rgba(255, 105, 180, 0.3);
+      border: 4px solid #ff69b4;
+      transition: all 0.3s ease;
+      animation: float 3s ease-in-out infinite;
+    }
+    .hero-image:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 40px rgba(255, 105, 180, 0.4);
+    }
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-10px);
+      }
+      60% {
+        transform: translateY(-5px);
+      }
+    }
+    .music-player {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        background: linear-gradient(135deg, #ff69b4 0%, #ff8da1 100%);
+        padding: 15px;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(255, 105, 180, 0.3);
+        transition: all 0.3s ease;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+      }
+      .music-player:hover {
+        transform: scale(1.05);
+        box-shadow: 0 12px 35px rgba(255, 105, 180, 0.4);
+      }
+      .music-player audio {
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.1);
+      }
+      .music-player audio::-webkit-media-controls-panel {
+        background: rgba(255, 255, 255, 0.1);
+      }
+      .music-controls {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+        width: 100%;
+      }
+      .music-btn {
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        cursor: pointer;
+        color: white;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .music-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: scale(1.1);
+      }
+      .song-title {
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+        text-align: center;
+        margin: 0;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        min-width: 0;
+      }
+  </style>
+</head>
+<body>
+  <!-- Music Player -->
+  <div class="music-player">
+    <div class="music-controls">
+      <button class="music-btn" onclick="window.previousSong()">⏮</button>
+      <p class="song-title" id="songTitle">Loading...</p>
+      <button class="music-btn" onclick="window.nextSong()">⏭</button>
+    </div>
+    <audio id="player" controls autoplay></audio>
+  </div>
+  <script src="playlist.js"></script>
+
+  <img src="assets/hey-you.jpeg" alt="Hey you!" class="hero-image" />
+  <h1>Are you free on July 10th? 🥺</h1>
+
+  <div class="buttons-container">
+    <button class="btn yes bounce" onclick="window.location.href='second.html'">Yes 💖</button>
+    <button class="btn no" onclick="moveNoButton()">No ��</button>
+  </div>
+
+  <script>
+    // Function to move the No button to a random position
+    function moveNoButton() {
+      const noButton = document.querySelector('.no');
+      const maxX = window.innerWidth - noButton.offsetWidth;
+      const maxY = window.innerHeight - noButton.offsetHeight;
+
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
+
+      noButton.style.position = 'fixed';
+      noButton.style.left = randomX + 'px';
+      noButton.style.top = randomY + 'px';
+    }
+  </script>
+</body>
+</html>
